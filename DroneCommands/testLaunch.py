@@ -1,4 +1,4 @@
-from djitellopy import tello
+from djitellopy import tello 
 import cv2
 
 camdroid = tello.Tello()

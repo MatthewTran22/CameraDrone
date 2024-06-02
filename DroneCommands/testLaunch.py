@@ -12,6 +12,8 @@ while True:
     print(camdroid.get_battery())
     camdroid.move_up(20)
     camdroid.move_down(20)
+    #Needs to be threaded, bop up and down to not trigger auto land, and constantly recieve frame data
+    #Probably make the bob up and down for hover method in drone reposition code
     frame = camdroid.get_frame_read()
     currFrame = frame.frame
     img = cv2.resize(currFrame, (600,600))

@@ -1,27 +1,21 @@
-from flask import Flask
-from flask_socketio import SocketIO
 from djitellopy import Tello
-import threading
-import time
 
-app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
+# Create a single Tello object and connect once
 tello = Tello()
 tello.connect()
 
-def get_tello_data():
-    while True:
-        temp = tello.get_temperature()
-        battery = tello.get_battery()
-        socketio.emit('drone_data', {'temperature': temp, 'battery': battery})
-        time.sleep(5)
+def get_drone_status():
+    # Fetch drone status
+    return tello.get_current_state()
 
-@app.route('/')
-def index():
-    return "Tello Drone Data API"
+def get_battery_level():
+    # Fetch battery level
+    return tello.get_battery()
 
-if __name__ == '__main__':
-    data_thread = threading.Thread(target=get_tello_data)
-    data_thread.daemon = True
-    data_thread.start()
-    socketio.run(app, host='0.0.0.0', port=5000)
+def get_flight_time():
+    # Fetch flight time
+    return tello.get_flight_time()
+
+def get_temp():
+    # Fetch highest temperature
+    return tello.get_highest_temperature()

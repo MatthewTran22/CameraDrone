@@ -1,16 +1,12 @@
 import cv2
-import numpy as np
 
-def runCam(cam):
-    while True:
-        ret, frame = cam.read()
-        cv2.imshow('webcam', frame)
-
-        if cv2.waitKey(1) == ord('q'):
-            break
-
-    cam.release()
-    cv2.destroyAllWindows()
+def findFace(img):
+    faceCascade = cv2.CascadeClassifier("Resources/harrcascade_frontalface_default.xml")
+    imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = faceCascade.detectMultiScale(imgGray,1.2,8)
 
 cap = cv2.VideoCapture(0)
-runCam(cap)
+while True:
+    _, img = cap.read()
+    cv2.imshow("Test", img)
+    cv2.waitKey(1)

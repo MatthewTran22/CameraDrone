@@ -10,26 +10,25 @@ This project utilizes the DJI Tello Drone to keep the user's face in the center 
     ```
 2. Navigate to the project directory:
     ```bash
-    cd CameraDrone
+    cd CameraDrone/DroneCommands
     ```
-3. Install the required dependencies:
+3. Activate the virtual environment:
     ```bash
-    npm install
+    #For Windows
+    source venvWin/Scripts/activate
+    #For Mac
+    source venvMac/bin/activate 
     ```
 
 ## Usage
 1. Connect the drone to your computer.
 2. Start the application:
     ```bash
-    npm start
+    python facetrack.py
     ```
-3. Use the provided interface to control the drone and view the camera feed.
+3. On takeoff, raise the drone to head level by placing your hand under the drone's bottom sensors
+4. Once at the desired height, stand in front of the camera and let the software do the rest
+5. Deactivate the software by pressing CTRL+C in the terminal
 
-## Contributing
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) first.
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-For any inquiries, please contact [yourname@example.com](mailto:yourname@example.com).
+## How it works
+The program utilizes the drone's camera to return its video feed to the software. OpenCV then utilizes its [frontal face haar cascade file](https://github.com/kipr/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml) to return the coordinates of the detected face within the image. The absolute center is also determined based on the resolution size of the image and the face dimensions. Once both are compared, the DJI Tello library will increase speed in the X or Y direction to reduce the difference between the two areas.

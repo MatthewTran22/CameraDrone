@@ -3,12 +3,6 @@
 ## Overview
 This project utilizes the DJI Tello Drone to keep the user's face in the center of its camera
 
-## Features
-- High-resolution camera
-- Real-time video streaming
-- Autonomous flight modes
-- GPS navigation
-
 ## Installation
 1. Clone the repository:
     ```bash
